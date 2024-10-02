@@ -5,6 +5,10 @@
   text-align: center;
 }
 
+.background {
+  background-image: url('https://images.pexels.com/photos/209831/pexels-photo-209831.jpeg');
+}
+
 .logo {
   height: 6em;
   padding: 1.5em;
