@@ -1,7 +1,18 @@
 function ErrorMessage() {
   return (
-    <div className="max-w-md mx-auto mt-3">
-      <p className="text-4xl font-black text-red-500 dark:text-red-400">Error: ...</p>
+    <div
+      style={{
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center'
+      }}
+    >
+      <p style={{
+        color: 'black',
+        textAlign: 'center',
+        backgroundColor: 'grey',
+        width: '30%'
+      }}>No data Found</p>
     </div>
   );
 }
