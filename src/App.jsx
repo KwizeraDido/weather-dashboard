@@ -58,11 +58,7 @@ function App() {
       axios.get(url).then((response) => {
         setData(response.data)
         console.log(response.data)
-      }).catch((err) => {
-        console.log(err.response.data.message)
-        setError(err.response.data.message)
       })
-
       setLocation('')
     }
   }
@@ -70,8 +66,6 @@ function App() {
   const getIconUrl = (iconCode) => {
     return `http://openweathermap.org/img/wn/${iconCode}@2x.png`;
   };
-
-  console.log('Error', error)
 
   return (
     <div className="app">
