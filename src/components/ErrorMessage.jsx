@@ -1,4 +1,4 @@
-function ErrorMessage() {
+function ErrorMessage({error}) {
   return (
     <div
       style={{
@@ -12,7 +12,7 @@ function ErrorMessage() {
         textAlign: 'center',
         backgroundColor: 'grey',
         width: '30%'
-      }}>No data Found</p>
+      }}>{error}</p>
     </div>
   );
 }

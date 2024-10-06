@@ -13,6 +13,7 @@ const WeatherCard = ({data, getIconUrl}) => {
             {data.main ? <h1>{data.main.temp.toFixed()}°C</h1> : null}
           </div>
           {data.name !== undefined &&
+          <>
             <div className="bottom">
               <div className="feels">
                 {data.main ? <p className='bold'>{data.main.feels_like.toFixed()}°C</p> : null}
@@ -27,6 +28,10 @@ const WeatherCard = ({data, getIconUrl}) => {
                 <p>Wind Speed</p>
               </div>
             </div>
+            <div className="bottom">
+              {data.weather ? <p>{data.weather[0].main}</p> : null}
+            </div>
+          </>
           }
           {/* <div className="description">
             {data.weather ? <p>{data.weather[0].main}</p> : null}
