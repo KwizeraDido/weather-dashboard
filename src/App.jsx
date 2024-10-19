@@ -10,7 +10,7 @@ function App() {
   const [data, setData] = useState({})
   const [location, setLocation] = useState('')
   const [position, setPosition] = useState({ latitude: null, longitude: null })
-  const [error, setError] = useState('')
+  const [err, setErr] = useState('')
   const [loading, setLoading] = useState(true)
   const api_key = '7b7dd31d7ed32af6f67b262f117e06db';
 
@@ -20,6 +20,7 @@ function App() {
     };
 
     const handleError = () => {
+      setErr("Geolocation is not available in your browser.");
       console.error("Geolocation is not available in your browser.");
     };
 
@@ -40,9 +41,8 @@ function App() {
           const url = `https://api.openweathermap.org/data/2.5/weather?lat=${position.latitude}&lon=${position.longitude}&appid=${api_key}&units=metric`;
           const response = await axios.get(url);
           setData(response.data);
-          setError('');
         } catch (err) {
-          setError('Failed to fetch weather data. Please try again.');
+          setErr('Failed to fetch weather data. Please try again.');
           console.error('Error fetching weather data:', err);
         } finally {
           setLoading(false);
@@ -54,14 +54,20 @@ function App() {
   }, [position, api_key]);
 
   const searchLocation = (event) => {
-    if (event.key === 'Enter') {
-      axios.get(url).then((response) => {
-        setData(response.data)
-        console.log(response.data)
+    event.preventDefault(); // Prevent default form submission behavior
+     axios.get(url)
+      .then((response) => {
+        setData(response.data);
+        setErr('');
+        console.log(response.data);
       })
-      setLocation('')
-    }
-  }
+      .catch((error) => {
+        setErr(error.response.data.message)
+        setData({})
+        console.error("Error fetching location data:", error);
+      });
+    setLocation(''); // Clear the input after the search
+  };
 
   const getIconUrl = (iconCode) => {
     return `http://openweathermap.org/img/wn/${iconCode}@2x.png`;
@@ -72,9 +78,9 @@ function App() {
       <Search location={location} setLocation={setLocation} searchLocation={searchLocation} />
       {loading ? (
         <p>Loading...</p>
-      ) : error ? (
-        <ErrorMessage message={error} />
-      ) : data ? (
+      ) : err ? (
+        <ErrorMessage message={err} />
+      ) : data && !err ? (
         <WeatherCard data={data} getIconUrl={getIconUrl} />
       ) : null}
     </div>

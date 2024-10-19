@@ -1,4 +1,4 @@
-function ErrorMessage({error}) {
+function ErrorMessage({message}) {
   return (
     <div
       style={{
@@ -8,11 +8,11 @@ function ErrorMessage({error}) {
       }}
     >
       <p style={{
-        color: 'black',
+        color: '#4CC9FE',
         textAlign: 'center',
-        backgroundColor: 'grey',
+        backgroundColor: 'rgba(0,0,0,0.3)',
         width: '30%'
-      }}>{error}</p>
+      }}>{message}</p>
     </div>
   );
 }

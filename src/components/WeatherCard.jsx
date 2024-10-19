@@ -5,7 +5,7 @@ const WeatherCard = ({data, getIconUrl}) => {
           <div className="location">
             <p>{data.name}</p>
             <img 
-              src={getIconUrl(data.weather[0].icon)} 
+              src={getIconUrl(data && data.weather[0].icon)} 
               alt="Weather icon"
             />
           </div>
